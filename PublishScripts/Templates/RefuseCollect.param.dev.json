@@ -1,0 +1,29 @@
+{
+  "siteName": {
+    "value": "Refusecollection"
+  },
+  "hostingPlanName": {
+    "value": "WebApptst2"
+  },
+  "siteLocation": {
+    "value": "West Europe"
+  },
+  "sku": {
+    "value": "Free"
+  },
+  "workerSize": {
+    "value": "0"
+  },
+  "siteMode": {
+    "value": "Limited"
+  },
+  "computeMode": {
+    "value": "0"
+  },
+  "subscriptionId": {
+    "value": "12ea9a4c-0309-4f8c-a8b3-9800f7a05341"
+  },
+  "resourceGroup": {
+    "value": "Default-ApplicationInsights-CentralUS"
+  }
+}
