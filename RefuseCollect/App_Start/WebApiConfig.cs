@@ -33,7 +33,11 @@ namespace RefuseCollect
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi2",
+<<<<<<< HEAD
                 routeTemplate: "api/{controller}/{abid}/{pareaid}",
+=======
+                routeTemplate: "api/{controller}/{id}/{pareaid}",
+>>>>>>> origin/master
                 defaults: new
                 {
                     id = RouteParameter.Optional,
@@ -47,6 +51,7 @@ namespace RefuseCollect
 
                 }
             );
+<<<<<<< HEAD
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi3",
@@ -67,6 +72,8 @@ namespace RefuseCollect
 
             
 
+=======
+>>>>>>> origin/master
         }
     }
 }

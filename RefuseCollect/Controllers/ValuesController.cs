@@ -18,6 +18,11 @@ namespace RefuseCollect.Controllers
         // GET api/values 
         public IEnumerable<RefuseEntity> Get(String id)
         {
+<<<<<<< HEAD
+=======
+
+            //string pcode = "Dublin 7";
+>>>>>>> origin/master
             Models.RefuseModel refusemodel = new Models.RefuseModel();
 
             CloudTable table = refusemodel.Table("RefuseCollect");
@@ -27,6 +32,7 @@ namespace RefuseCollect.Controllers
             return results;
         }
 
+<<<<<<< HEAD
         public int Get(String anid, String Aggtype, String Aggquery)
         {
             //see https://social.msdn.microsoft.com/Forums/azure/en-US/33553664-9715-475c-807e-f0686304cd08/multiple-get-will-cause-add-azure-api-app-client-to-fail?forum=AzureAPIApps
@@ -48,12 +54,20 @@ namespace RefuseCollect.Controllers
 
 
         public RefuseEntity Get(String abid, String pareaid)
+=======
+
+        public RefuseEntity Get(String id, String pareaid)
+>>>>>>> origin/master
         {
             Models.RefuseModel refusemodel = new Models.RefuseModel();
 
             CloudTable table = refusemodel.Table("RefuseCollect");
 
+<<<<<<< HEAD
             var selectrefuse = new PutRefuse() { id = abid, pareaid = pareaid };
+=======
+            var selectrefuse = new PutRefuse() { id = id, pareaid = pareaid };
+>>>>>>> origin/master
 
             var results = refusemodel.RetrieveRefuse(table, selectrefuse);
 
@@ -61,7 +75,11 @@ namespace RefuseCollect.Controllers
 
         }
 
+<<<<<<< HEAD
         //"api/{controller}/{postid}/{postpareaid}/{postlatitude}/{postlongitude}"
+=======
+
+>>>>>>> origin/master
         public String Post([FromBody] PostRefuse postrefuse)
         {
             Models.RefuseModel refusemodel = new Models.RefuseModel();

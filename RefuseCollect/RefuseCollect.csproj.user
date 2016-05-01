@@ -7,8 +7,11 @@
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>True</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
+<<<<<<< HEAD
     <NameOfLastUsedPublishProfile>pbrefusecollect %283%29</NameOfLastUsedPublishProfile>
     <UseIISExpress>true</UseIISExpress>
+=======
+>>>>>>> origin/master
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
