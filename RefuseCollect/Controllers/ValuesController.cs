@@ -18,8 +18,6 @@ namespace RefuseCollect.Controllers
         // GET api/values 
         public IEnumerable<RefuseEntity> Get(String id)
         {
-
-            //string pcode = "Dublin 7";
             Models.RefuseModel refusemodel = new Models.RefuseModel();
 
             CloudTable table = refusemodel.Table("RefuseCollect");
@@ -29,14 +27,33 @@ namespace RefuseCollect.Controllers
             return results;
         }
 
+        public int Get(String anid, String Aggtype, String Aggquery)
+        {
+            //see https://social.msdn.microsoft.com/Forums/azure/en-US/33553664-9715-475c-807e-f0686304cd08/multiple-get-will-cause-add-azure-api-app-client-to-fail?forum=AzureAPIApps
+            //need a unique string for each route parameter, in SWAGGER 2.0 very poor design no use of hierarchical structure
+            if (Aggtype == "Agg" && Aggquery == "CountById")
+            {
+                Models.RefuseModel refusemodel = new Models.RefuseModel();
 
-        public RefuseEntity Get(String id, String pareaid)
+                CloudTable table = refusemodel.Table("RefuseCollect");
+
+                var results = refusemodel.Selectbyid(anid, table);
+
+                var countrefusebyparreaid = results.Count();
+
+                return countrefusebyparreaid;
+            }
+            else return 0;
+        }
+
+
+        public RefuseEntity Get(String abid, String pareaid)
         {
             Models.RefuseModel refusemodel = new Models.RefuseModel();
 
             CloudTable table = refusemodel.Table("RefuseCollect");
 
-            var selectrefuse = new PutRefuse() { id = id, pareaid = pareaid };
+            var selectrefuse = new PutRefuse() { id = abid, pareaid = pareaid };
 
             var results = refusemodel.RetrieveRefuse(table, selectrefuse);
 
@@ -44,7 +61,7 @@ namespace RefuseCollect.Controllers
 
         }
 
-
+        //"api/{controller}/{postid}/{postpareaid}/{postlatitude}/{postlongitude}"
         public String Post([FromBody] PostRefuse postrefuse)
         {
             Models.RefuseModel refusemodel = new Models.RefuseModel();

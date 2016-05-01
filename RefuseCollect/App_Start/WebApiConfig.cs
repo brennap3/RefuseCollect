@@ -33,7 +33,7 @@ namespace RefuseCollect
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi2",
-                routeTemplate: "api/{controller}/{id}/{pareaid}",
+                routeTemplate: "api/{controller}/{abid}/{pareaid}",
                 defaults: new
                 {
                     id = RouteParameter.Optional,
@@ -47,6 +47,26 @@ namespace RefuseCollect
 
                 }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi3",
+                routeTemplate: "api/{controller}/{anid}/{aggtype}/{aggquery}",
+                defaults: new
+                {
+                    id = RouteParameter.Optional,
+                    pareaname = RouteParameter.Optional,
+                    pareaid = RouteParameter.Optional,
+                    platitude = RouteParameter.Optional,
+                    plongitude = RouteParameter.Optional,
+                    postrefuse = RouteParameter.Optional,
+                    putrefuse = RouteParameter.Optional
+
+
+                }
+            );
+
+            
+
         }
     }
 }

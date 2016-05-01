@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="pbrefusecollect" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Peter\\Documents\\Visual\ Studio\ 2015\\Projects\\RefuseCollect\\RefuseCollect\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Peter\\Documents\\Visual\ Studio\ 2015\\Projects\\RefuseCollect\\RefuseCollect\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="ConnString-Web.config Connection String" description="" value="DefaultEndpointsProtocol=http;AccountName=pbrefusedispazdb1;AccountKey=G2oUmM34j0dUpXlmr0u2Ar4PBgVb1wXWiJjjd681HWBHRBMCEKJkFJRd+r+MTuaUEFIJQRj5MPQSdNoJhwM9sA==" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Peter\\Documents\\Visual\ Studio\ 2015\\Projects\\RefuseCollect\\RefuseCollect\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ConnString']/@connectionString" />
+  </parameter>
+</parameters>
