@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web;
-using Newtonsoft.Json;
-using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
-using Microsoft.WindowsAzure.Storage.Auth;
-using System.Configuration;
 
 namespace RefuseCollect.Controllers
 {
@@ -38,6 +31,28 @@ namespace RefuseCollect.Controllers
                 CloudTable table = refusemodel.Table("RefuseCollect");
 
                 var results = refusemodel.Selectbyid(anid, table);
+
+                var countrefusebyparreaid = results.Count();
+
+                return countrefusebyparreaid;
+            } else if (Aggtype == "Agg" && Aggquery == "CountByIdCollect")
+            {
+                Models.RefuseModel refusemodel = new Models.RefuseModel();
+
+                CloudTable table = refusemodel.Table("RefuseCollect");
+
+                var results = refusemodel.SelectbyidCollect(anid, table);
+
+                var countrefusebyparreaid = results.Count();
+
+                return countrefusebyparreaid;
+            }  else if (Aggtype == "Agg" && Aggquery == "CountByIdNotCollect")
+            {
+                Models.RefuseModel refusemodel = new Models.RefuseModel();
+
+                CloudTable table = refusemodel.Table("RefuseCollect");
+
+                var results = refusemodel.SelectbyidNotCollect(anid, table);
 
                 var countrefusebyparreaid = results.Count();
 

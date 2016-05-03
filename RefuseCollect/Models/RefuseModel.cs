@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web;
-using Newtonsoft.Json;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
-using Microsoft.WindowsAzure.Storage.Auth;
 using System.Configuration;
 
 namespace RefuseCollect.Models
@@ -31,6 +24,32 @@ namespace RefuseCollect.Models
         public IEnumerable<Controllers.RefuseEntity> Selectbyid(String id, CloudTable table)
         {
             TableQuery<Controllers.RefuseEntity> query = new TableQuery<Controllers.RefuseEntity>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, id));
+            
+            var results = table.ExecuteQuery(query);
+
+            return results;
+        }
+
+        public IEnumerable<Controllers.RefuseEntity> SelectbyidCollect(String id, CloudTable table)
+        {
+            TableQuery<Controllers.RefuseEntity> query = new TableQuery<Controllers.RefuseEntity>().Where(
+            TableQuery.CombineFilters(
+            TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, id),
+            TableOperators.And,
+            TableQuery.GenerateFilterCondition("HasBeenCollected", QueryComparisons.Equal, "Refuse has been collected")));
+
+            var results = table.ExecuteQuery(query);
+
+            return results;
+        }
+        //Has Not been Collected Yet
+        public IEnumerable<Controllers.RefuseEntity> SelectbyidNotCollect(String id, CloudTable table)
+        {
+            TableQuery<Controllers.RefuseEntity> query = new TableQuery<Controllers.RefuseEntity>().Where(
+            TableQuery.CombineFilters(
+            TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, id),
+            TableOperators.And,
+            TableQuery.GenerateFilterCondition("HasBeenCollected", QueryComparisons.Equal, "Has Not been Collected Yet")));
 
             var results = table.ExecuteQuery(query);
 
@@ -41,14 +60,14 @@ namespace RefuseCollect.Models
         {
 
             DateTime nowDate = DateTime.Now;
-
-            string time = "Time:" + nowDate;
+            //ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss \"GMT\"zzz")
+            string time = "Time:" + nowDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss \"GMT\"zzz");
 
             DateTime collectionDate = nowDate.AddYears(1000);
 
-            string time2 = "Time:" + collectionDate;
+            string time2 = "Time:" + collectionDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss \"GMT\"zzz");
 
-            Controllers.RefuseEntity refuse = new Controllers.RefuseEntity(postrefuse.id, postrefuse.pareaid, postrefuse.platitude, postrefuse.plongitude, time, time2, "false");
+            Controllers.RefuseEntity refuse = new Controllers.RefuseEntity(postrefuse.id, postrefuse.pareaid, postrefuse.platitude, postrefuse.plongitude, time, "Has Not been Collected Yet", time2 );
 
             TableOperation insertOperation = TableOperation.Insert(refuse);
             try
@@ -69,10 +88,13 @@ namespace RefuseCollect.Models
 
             if (updateEntity != null)
             {
-                DateTime nowDate = DateTime.Now;
-                string time3 = "Time:" + nowDate;
+                DateTime nowDate2 = DateTime.Now;
+
+                string time3 = "Time:" + nowDate2.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss \"GMT\"zzz");
+                
                 // Change the collection time
                 updateEntity.Timecollected = time3;
+                updateEntity.HasBeenCollected = "Refuse has been collected";
 
                 // Create the Replace TableOperation.
                 TableOperation updateOperation = TableOperation.Replace(updateEntity);
