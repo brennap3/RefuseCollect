@@ -42,11 +42,11 @@ namespace RefuseCollect.Models
 
             DateTime nowDate = DateTime.Now;
 
-            string time = "time:" + nowDate;
+            string time = "Time:" + nowDate;
 
             DateTime collectionDate = nowDate.AddYears(1000);
 
-            string time2 = "time:" + collectionDate;
+            string time2 = "Time:" + collectionDate;
 
             Controllers.RefuseEntity refuse = new Controllers.RefuseEntity(postrefuse.id, postrefuse.pareaid, postrefuse.platitude, postrefuse.plongitude, time, time2, "false");
 
